@@ -50,19 +50,6 @@ public class ThirdPersonController : MonoBehaviour
             playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, rotationSpeed * Time.deltaTime);
         }
 
-        IsGrounded = Physics.Raycast(player.transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, GroundMask);
-
-        Debug.DrawRay(player.transform.position, Vector3.down, Color.red, playerHeight * 0.5f + 0.2f);
-
-        //if (IsGrounded)
-        //{
-        //    rb.drag = GroundDrag;
-        //}
-        //else
-        //{
-        //    rb.drag = 0f;
-        //}
-
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         if (flatVel.magnitude > moveSpeed)
@@ -71,34 +58,16 @@ public class ThirdPersonController : MonoBehaviour
             rb.velocity = new Vector3(limitedSpeed.x, rb.velocity.y, limitedSpeed.z);
         }
 
-        float moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
-
-        if (moveAmount < 0.05f)
-        {
-            //rb.velocity = new Vector3(0, rb.velocity.y, 0);
-        }
-
         UpdateAnimations();
-
-        //if (CanJump && IsGrounded && Input.GetKey(KeyCode.Space))
-        //{
-        //    Jump();
-        //    CanJump = false;
-        //    Invoke("ResetJump", jumpDelay);
-        //}
     }
 
     private void FixedUpdate()
     {
         if (inputDir != Vector3.zero)
         {
-            if (IsGrounded)
                 rb.AddForce(inputDir.normalized * moveSpeed * 10f, ForceMode.Force);
-            else if (!IsGrounded)
-                rb.AddForce(inputDir.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            
         }
-
-
     }
 
     private void UpdateAnimations()
@@ -115,19 +84,5 @@ public class ThirdPersonController : MonoBehaviour
         }
 
         anim.SetFloat("Vertical", moveAmount, 0.1f, Time.deltaTime);
-        //anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
-    }
-
-    private void Jump()
-    {
-        Debug.Log("Jumping");
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-        rb.AddForce(player.transform.up * jumpForce, ForceMode.Impulse);
-    }
-
-    private void ResetJump()
-    {
-        CanJump = true;
     }
 }
