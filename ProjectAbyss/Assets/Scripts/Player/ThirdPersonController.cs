@@ -12,6 +12,9 @@ public class ThirdPersonController : MonoBehaviour
     public Animator anim;
     public GameObject Shield;
     public GameObject Sword;
+    public GameObject Ghost;
+
+    private GameObject ActiveGhost;
 
     public float playerHeight;
     public LayerMask GroundMask;
@@ -32,6 +35,12 @@ public class ThirdPersonController : MonoBehaviour
     public bool swingingSword;
     public float swordStartingRotation;
     public float SwordDuration;
+    public float GhostDelay;
+    public bool canCastGhost;
+    public bool ghostAlive;
+    public float GhostDuration;
+    public bool canTeleport;
+    public float teleportDelay;
 
     private float horizontalInput;
     private float verticalInput;
@@ -46,6 +55,7 @@ public class ThirdPersonController : MonoBehaviour
 
         CanJump = true;
         canUseShield = true;
+        canCastGhost = true;
 
         Shield.SetActive(false);
         Sword.SetActive(false);
@@ -77,6 +87,7 @@ public class ThirdPersonController : MonoBehaviour
 
         CastShield();
         CastSword();
+        CastGhost();
     }
 
     private void FixedUpdate()
@@ -119,6 +130,44 @@ public class ThirdPersonController : MonoBehaviour
         Invoke("EnableSword", swordDelay);
     }
 
+    private void CastGhost()
+    {
+        if (canCastGhost && Input.GetKey(KeyCode.Alpha3))
+        {
+            ActiveGhost = Instantiate(Ghost, playerObj.transform.position, playerObj.transform.rotation);
+            ActiveGhost.GetComponent<PlayerGhost>().Direction = inputDir.normalized;
+            ghostAlive = true;
+            canTeleport = false;
+            canCastGhost = false;
+            Invoke("EnableTeleport", teleportDelay);
+            Invoke("DisableGhost", GhostDuration);
+        }
+
+        if (ghostAlive && canTeleport && Input.GetKey(KeyCode.Alpha3))
+        {
+            player.transform.position = ActiveGhost.transform.position;
+            Destroy(ActiveGhost);
+            ghostAlive = false;
+            Invoke("EnableGhost", GhostDelay);
+        }
+
+    }
+
+    private void EnableTeleport()
+    {
+        canTeleport = true;
+    }
+
+    private void DisableGhost()
+    {
+        if (ActiveGhost == null)
+            return;
+
+        Destroy(ActiveGhost);
+        ghostAlive = false;
+        Invoke("EnableGhost", GhostDelay);
+    }
+
     private void EnableShield()
     {
         canUseShield = true;
@@ -127,6 +176,11 @@ public class ThirdPersonController : MonoBehaviour
     private void EnableSword()
     {
         canUseSword = true;
+    }
+
+    private void EnableGhost()
+    {
+        canCastGhost = true;
     }
 
     private void UpdateAnimations()
