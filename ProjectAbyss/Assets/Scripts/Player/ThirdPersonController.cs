@@ -11,6 +11,7 @@ public class ThirdPersonController : MonoBehaviour
     public Rigidbody rb;
     public Animator anim;
     public GameObject Shield;
+    public GameObject Sword;
 
     public float playerHeight;
     public LayerMask GroundMask;
@@ -25,6 +26,12 @@ public class ThirdPersonController : MonoBehaviour
     public float shieldDuration;
     public float shieldDelay;
     public bool canUseShield;
+    public float swordSpeed;
+    public float swordDelay;
+    public bool canUseSword;
+    public bool swingingSword;
+    public float swordStartingRotation;
+    public float SwordDuration;
 
     private float horizontalInput;
     private float verticalInput;
@@ -41,6 +48,7 @@ public class ThirdPersonController : MonoBehaviour
         canUseShield = true;
 
         Shield.SetActive(false);
+        Sword.SetActive(false);
     }
 
     private void Update()
@@ -68,6 +76,7 @@ public class ThirdPersonController : MonoBehaviour
         UpdateAnimations();
 
         CastShield();
+        CastSword();
     }
 
     private void FixedUpdate()
@@ -94,9 +103,30 @@ public class ThirdPersonController : MonoBehaviour
         Invoke("EnableShield", shieldDelay);
     }
 
+    private void CastSword()
+    {
+        if (canUseShield && Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Sword.SetActive(true);
+            canUseSword = false;
+            Invoke("DisableSword", SwordDuration);
+        }
+    }
+
+    private void DisableSword()
+    {
+        Sword.SetActive(false);
+        Invoke("EnableSword", swordDelay);
+    }
+
     private void EnableShield()
     {
         canUseShield = true;
+    }
+
+    private void EnableSword()
+    {
+        canUseSword = true;
     }
 
     private void UpdateAnimations()
