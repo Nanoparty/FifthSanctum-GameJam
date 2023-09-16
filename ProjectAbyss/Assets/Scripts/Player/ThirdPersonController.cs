@@ -10,6 +10,7 @@ public class ThirdPersonController : MonoBehaviour
     public Transform playerObj;
     public Rigidbody rb;
     public Animator anim;
+    public GameObject Shield;
 
     public float playerHeight;
     public LayerMask GroundMask;
@@ -21,6 +22,9 @@ public class ThirdPersonController : MonoBehaviour
     public float jumpForce;
     public float jumpDelay;
     public float airMultiplier;
+    public float shieldDuration;
+    public float shieldDelay;
+    public bool canUseShield;
 
     private float horizontalInput;
     private float verticalInput;
@@ -34,6 +38,9 @@ public class ThirdPersonController : MonoBehaviour
         Cursor.visible = false;
 
         CanJump = true;
+        canUseShield = true;
+
+        Shield.SetActive(false);
     }
 
     private void Update()
@@ -59,6 +66,8 @@ public class ThirdPersonController : MonoBehaviour
         }
 
         UpdateAnimations();
+
+        CastShield();
     }
 
     private void FixedUpdate()
@@ -66,8 +75,28 @@ public class ThirdPersonController : MonoBehaviour
         if (inputDir != Vector3.zero)
         {
                 rb.AddForce(inputDir.normalized * moveSpeed * 10f, ForceMode.Force);
-            
         }
+    }
+
+    private void CastShield()
+    {
+        if (canUseShield && Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Shield.SetActive(true);
+            canUseShield = false;
+            Invoke("DisableShield", shieldDuration);
+        }
+    }
+
+    private void DisableShield()
+    {
+        Shield.SetActive(false);
+        Invoke("EnableShield", shieldDelay);
+    }
+
+    private void EnableShield()
+    {
+        canUseShield = true;
     }
 
     private void UpdateAnimations()
