@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/ThirdPersonSandbox.unity
+    guid: 81a2b92cf33d90c4e8463a0cfab15a58
+  - enabled: 1
+    path: Assets/Scenes/TestTransition.unity
+    guid: 0e50ab9449371da488d5841eeab935fd
   m_configObjects: {}

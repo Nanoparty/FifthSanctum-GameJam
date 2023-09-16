@@ -71,6 +71,13 @@ public class ThirdPersonController : MonoBehaviour
             rb.velocity = new Vector3(limitedSpeed.x, rb.velocity.y, limitedSpeed.z);
         }
 
+        float moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
+
+        if (moveAmount < 0.05f)
+        {
+            //rb.velocity = new Vector3(0, rb.velocity.y, 0);
+        }
+
         UpdateAnimations();
 
         //if (CanJump && IsGrounded && Input.GetKey(KeyCode.Space))
