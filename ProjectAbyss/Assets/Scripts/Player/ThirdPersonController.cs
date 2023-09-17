@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ThirdPersonController : MonoBehaviour
 {
+    [Header("Flags")]
+    public bool ShieldOn;
+    public bool SwordOn;
+    public bool CloneOn;
+
     [Header("References")]
     public Transform orientation;
     public Transform player;
@@ -100,6 +105,9 @@ public class ThirdPersonController : MonoBehaviour
 
     private void CastShield()
     {
+        if (!ShieldOn)
+            return;
+
         if (canUseShield && Input.GetKeyDown(KeyCode.Alpha1))
         {
             Shield.SetActive(true);
@@ -116,6 +124,9 @@ public class ThirdPersonController : MonoBehaviour
 
     private void CastSword()
     {
+        if (!SwordOn)
+            return;
+
         if (canUseShield && Input.GetKeyDown(KeyCode.Alpha2))
         {
             Sword.SetActive(true);
@@ -132,6 +143,8 @@ public class ThirdPersonController : MonoBehaviour
 
     private void CastGhost()
     {
+        if (!CloneOn)
+            return;
         if (canCastGhost && Input.GetKey(KeyCode.Alpha3))
         {
             ActiveGhost = Instantiate(Ghost, playerObj.transform.position, playerObj.transform.rotation);
