@@ -12,20 +12,29 @@ public class OverworldManager : MonoBehaviour
     private void Start()
     {
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
-        switch (Data.Phase)
+        if (Data.GameStarted)
         {
-            case 0:
-                Player.transform.position = StartLocation;
-                break;
-            case 1:
-                Player.transform.position = Phase1Location;
-                break;
-            case 2:
-                Player.transform.position = Phase2Location;
-                break;
-            case 3:
-                Player.transform.position = Phase3Location;
-                break;
+            Player.transform.position = Data.PlayerLastPos;
         }
+        else
+        {
+            Data.GameStarted = true;
+        }
+
+        //switch (Data.Phase)
+        //{
+        //    case 0:
+        //        Player.transform.position = StartLocation;
+        //        break;
+        //    case 1:
+        //        Player.transform.position = Phase1Location;
+        //        break;
+        //    case 2:
+        //        Player.transform.position = Phase2Location;
+        //        break;
+        //    case 3:
+        //        Player.transform.position = Phase3Location;
+        //        break;
+        //}
     }
 }
