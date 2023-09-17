@@ -31,6 +31,8 @@ public class RangedEnemy : MonoBehaviour
         playerPos.y += 1;
         if (!Attacking && Vector3.Distance(playerPos, transform.position) <= AttackRange)
         {
+            audioSource.Play();
+
             Attacking = true;
             mr.material = AttackMaterial;
             Invoke("FireProjectile", AttackDelay);
@@ -41,7 +43,6 @@ public class RangedEnemy : MonoBehaviour
     {
         mr.material = IdleMaterial;
         GameObject projectile = Instantiate(Projectile, transform.position, Quaternion.identity);
-        audioSource.Play();
         Invoke("AttackReset", AttackRecharge);
     }
 
