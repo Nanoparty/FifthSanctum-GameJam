@@ -304,7 +304,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2042,11 +2042,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2106344913997683833, guid: a0e17d0439a5302498c76e99c2081876, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000164404
+      value: 0.000000016440397
       objectReference: {fileID: 0}
     - target: {fileID: 2106344913997683833, guid: a0e17d0439a5302498c76e99c2081876, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000050766973
+      value: -0.000000005076696
       objectReference: {fileID: 0}
     - target: {fileID: 2106344914125122700, guid: a0e17d0439a5302498c76e99c2081876, type: 3}
       propertyPath: m_RootOrder
@@ -7207,7 +7207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1654569307
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8993,6 +8993,10 @@ PrefabInstance:
       propertyPath: m_text
       value: We are not defined by what obstacles we encounter,
       objectReference: {fileID: 0}
+    - target: {fileID: 280057768094464162, guid: 77993f1fb1f0ba14f882b4ff9a57602f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77993f1fb1f0ba14f882b4ff9a57602f, type: 3}
 --- !u!224 &1998770955 stripped
@@ -9295,7 +9299,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[2] Sword'
+  m_text: '[LMB] Sword'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

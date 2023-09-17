@@ -108,7 +108,7 @@ public class ThirdPersonController : MonoBehaviour
         if (!ShieldOn)
             return;
 
-        if (canUseShield && Input.GetKeyDown(KeyCode.Alpha1))
+        if (canUseShield && Input.GetKeyDown(KeyCode.Mouse1))
         {
             Shield.SetActive(true);
             canUseShield = false;
@@ -127,7 +127,7 @@ public class ThirdPersonController : MonoBehaviour
         if (!SwordOn)
             return;
 
-        if (canUseShield && Input.GetKeyDown(KeyCode.Alpha2))
+        if (canUseShield && Input.GetKeyDown(KeyCode.Mouse0))
         {
             Sword.SetActive(true);
             canUseSword = false;
