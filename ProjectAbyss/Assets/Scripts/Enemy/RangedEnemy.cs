@@ -7,6 +7,7 @@ public class RangedEnemy : MonoBehaviour
     public GameObject Projectile;
     public Material AttackMaterial;
     public Material IdleMaterial;
+    public AudioSource audioSource;
 
     public MeshRenderer mr;
 
@@ -40,6 +41,7 @@ public class RangedEnemy : MonoBehaviour
     {
         mr.material = IdleMaterial;
         GameObject projectile = Instantiate(Projectile, transform.position, Quaternion.identity);
+        audioSource.Play();
         Invoke("AttackReset", AttackRecharge);
     }
 

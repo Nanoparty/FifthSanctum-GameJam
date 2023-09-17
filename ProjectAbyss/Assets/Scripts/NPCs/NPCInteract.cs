@@ -22,6 +22,8 @@ public class NPCInteract : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.E))
             {
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                Data.PlayerLastPos = player.transform.position;
                 SceneManager.LoadScene(NextScene, LoadSceneMode.Single);
             }
         }
