@@ -7,6 +7,8 @@ public class StoryTrigger : MonoBehaviour
     public GameObject TextObject;
     public float DeleteTimer;
 
+    private bool triggered;
+
     private void Start()
     {
         TextObject.SetActive(false);
@@ -14,8 +16,9 @@ public class StoryTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !triggered)
         {
+            triggered = true;
             TextObject.SetActive(true);
             Invoke("DeleteText", DeleteTimer);
         }

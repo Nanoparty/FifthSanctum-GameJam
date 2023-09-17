@@ -50,7 +50,7 @@ MonoBehaviour:
   IdleMaterial: {fileID: 2100000, guid: fba00b8fb0c51462ca83e2bc09cd13c5, type: 2}
   mr: {fileID: 0}
   Attacking: 0
-  AttackRange: 100
+  AttackRange: 25
   AttackDelay: 0.4
   AttackRecharge: 2
   Player: {fileID: 0}
